@@ -1,0 +1,42 @@
+package selenium;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.FileHandler;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByLinkText;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.v136.filesystem.model.File;
+import org.openqa.selenium.support.ui.Sleeper;
+
+public class Openchrome {
+
+
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+
+		WebDriver driver = null;
+		FileInputStream location=new FileInputStream("config.properties");
+		Properties properties=new Properties();
+		properties.load(location);
+		String browser=properties.getProperty("browser");
+		String browserlocation=properties.getProperty("location");
+		String URL=properties.getProperty("URL");
+
+		if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver",browserlocation);
+			driver = new ChromeDriver();
+		} else if(browser.equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.gecko.driver",browserlocation);
+			driver = new ChromeDriver();
+		}
